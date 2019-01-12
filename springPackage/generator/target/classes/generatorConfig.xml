@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- <classPathEntry location="ojdbc14.jar" /> -->
+    <properties resource="jdbc.properties" /> 
+    <context id="sqlserverTables" targetRuntime="MyBatis3"> 
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+        <plugin type="com.my.test.generate.plugins.TopSerializablePlugin"></plugin>
+        <plugin type="com.my.test.generate.plugins.SqlMapUnMergePlugin"></plugin>
+        <!-- DAO的生成,带有分页标识 -->
+        <plugin type="com.my.test.generate.plugins.PaginationAnnotaionPlugin">
+        	<property name="pageClass" value="com.my.test.dao.entity.Page"/>
+        </plugin>
+
+        <commentGenerator type="com.my.test.generate.plugins.DBCommentGenerator">
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driver}"    
+                        connectionURL="${jdbc.url}"    
+                        userId="${jdbc.username}"    
+                        password="${jdbc.password}">
+            <property name="remarksReporting" value="true" />
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.my.test.dao.entity" targetProject="./src/main/java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+         <!--对应的mapper.xml文件  -->    
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources">    
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>  
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.my.test.dao.interfaces" targetProject="./src/main/java">
+        </javaClientGenerator>
+
+        <!-- 数据库表 -->
+        <table tableName="TF_SCHEDULER_CONF" domainObjectName="SchedulerConfig">
+            <generatedKey column="ID" sqlStatement="MySql" />
+        </table>
+    </context>
+
+</generatorConfiguration>
