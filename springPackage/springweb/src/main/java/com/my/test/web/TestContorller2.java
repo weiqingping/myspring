@@ -22,8 +22,7 @@ public class TestContorller2 {
 	public UserInfoService getUserInfoService() {
 		return userInfoService;
 	}
-	
-	@Reference(registry="zookeeper",protocol="http")
+	@Reference(registry="zookeeper",protocol="dubbo",version="2.0")
 	public void setUserInfoService(UserInfoService userInfoService) {
 		this.userInfoService = userInfoService;
 	}

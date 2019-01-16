@@ -61,7 +61,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>org.spring.out.App</mainClass>
+							<mainClass>com.my.test.out.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
